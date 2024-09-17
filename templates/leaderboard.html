@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Leaderboard</title>
+    <link rel='stylesheet' href='{{ url_for("static", filename="styles.css")}}'/>
+    <script type='module' defer src='{{ url_for("static", filename="main.js")}}'></script>
+</head>
+
+<body class="bg-green-900">
+    <header>
+        <nav class="flex justify-around items-center bg-green-800">
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('index') }}"
+            >Home</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('game') }}"
+            >Game</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('leaderboard') }}"
+            >Leaderboard</a
+          >
+          {% if g.user %}
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('logout') }}"
+            >Logout</a
+          >
+          {% else %}
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('login') }}"
+            >Login</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('register') }}"
+            >Register</a
+          >
+          {% endif %}
+        </nav>
+      </header>
+    <main class=" text-white">
+        <h1 class=" font-medium text-5xl text-center my-6">Leaderboard</h1>
+        {% set pos = namespace(value=1) %}
+        {% for entry in entries %}
+        <table>
+            <tr>
+                <th>Position</th>
+                <th>Username</th>
+                <th>Round Reached</th>
+                <th>Kills</th>
+            </tr>
+            <tr>
+                <td>{{ pos.value }}</td>
+                <td>{{ entry['username'] }}</td>
+                <td>{{ entry['round'] }}</td>
+                <td>{{ entry['kills'] }}</td>
+            </tr>
+        </table>
+        {% set pos.value = pos.value + 1 %}
+        {% endfor %}
+    </main>
+</body>
+
+</html>

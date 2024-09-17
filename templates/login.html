@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Login</title>
+    <link rel='stylesheet' href='{{ url_for("static", filename="styles.css") }}'/>
+    <script type='module' defer src='{{ url_for("static", filename="main.css") }}'></script>
+</head>
+
+<body class="bg-green-900">
+    <header>
+        <nav class="flex justify-around items-center bg-green-800">
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('index') }}"
+            >Home</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('game') }}"
+            >Game</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('leaderboard') }}"
+            >Leaderboard</a
+          >
+          {% if g.user %}
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('logout') }}"
+            >Logout</a
+          >
+          {% else %}
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('login') }}"
+            >Login</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('register') }}"
+            >Register</a
+          >
+          {% endif %}
+        </nav>
+      </header>
+    <main class="bg-green-900 text-white text-left flex flex-col justify-center items-center">
+        <form action="" method="POST" novalidate>
+            {{ form.hidden_tag() }}
+            {{ form.username.label }}
+            {{ form.username() }}
+            <br>
+            {{ form.password.label }}
+            {{ form.password() }}
+            <br>
+            {{ form.submit() }}
+            {% for error in form.username.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+            {% for error in form.password.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </form>
+        <p class="w-fit mx-auto">Dont have an account?</p><a class="rounded-2xl px-8 py-2 text-green-900 mx-auto bg-white" href="{{ url_for('register') }}">Register</a>
+    </main>
+</body>
+
+</html>

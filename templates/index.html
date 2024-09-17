@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website</title>
+  <link rel="stylesheet" href='{{ url_for("static", filename="styles.css")}}' />
+  <script type="module" defer src='{{ url_for("static", filename="main.js")}}'></script>
+</head>
+
+<body class="bg-green-900">
+  <header>
+    <nav class="flex justify-around items-center bg-green-800">
+      <a class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+        href="{{ url_for('index') }}">Home</a>
+      <a class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+        href="{{ url_for('game') }}">Game</a>
+      <a class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+        href="{{ url_for('leaderboard') }}">Leaderboard</a>
+      {% if g.user %}
+      <a class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+        href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+      <a class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+        href="{{ url_for('login') }}">Login</a>
+      <a class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+        href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main class="text-white w-4/5 mx-auto text-center">
+    <h1 class="text-5xl font-medium my-6">Welcome!</h1>
+    <section id="howtoplay">
+      <h2 class="text-center text-4xl font-medium my-6">How To Play</h2>
+      <p>
+        In this game you have been sentenced to death for being a wizard among
+        the ordinary, and the whole village is after you! Luckily since you're
+        a wizard you have means to deal with them! Your aim is to dispose of
+        the villagers using your love for fireballs. Since you're magic it can be in any direction!
+      </p>
+      <h3 class="text-center text-3xl font-medium my-6">Controls</h3>
+      <ul>
+        <li>
+          <p>
+            W S A D to move forwards, backwards, left and right respectively.
+          </p>
+        </li>
+        <li>
+          <p>Left click where you want to shoot.</p>
+        </li>
+        <li>
+          <p>Press R to refill your mana.</p>
+        </li>
+        <li>
+          <p>If you figure out how to cheat, you will be punished with eternal gameplay as you cannot die! Say goodbye to that sweet leaderboard entry!</p>
+        </li>
+      </ul>
+      <h4 class="text-center text-2xl font-medium my-6">Power-Ups</h4>
+      <div class="my-4">
+        <h5 class="font-medium text-xl">Heart</h5>
+        <img class="inline" src="{{ url_for('static', filename='heart.png') }}" alt="This is the heart powerup." />
+        <p>When picked up the player regains 30HP.</p>
+      </div>
+      <div class="my-4">
+        <h5 class="font-medium text-xl">Surge</h5>
+        <img class="inline" src="{{ url_for('static', filename='surge.png') }}" alt="This is the surge powerup." />
+        <p>
+          When picked up the player shoots fireballs in eight directions for
+          5s.
+        </p>
+      </div>
+      <div class="my-4">
+        <h5 class="font-medium text-xl">Speed Gem</h5>
+        <img class="inline" src="{{ url_for('static', filename='gem.png') }}" alt="This is the speed gem powerup." />
+        <p>When picked up the player's speed triples for 10s.</p>
+      </div>
+      <div class="my-4">
+        <h5 class="font-medium text-xl">Shield</h5>
+        <img class="inline" src="{{ url_for('static', filename='shield.png') }}" alt="This is the shield powerup." />
+        <p>
+          When picked up the player gets a shield which voids all damage for
+          10s.
+        </p>
+      </div>
+      <div class="my-4">
+        <h5 class="font-medium text-xl">Death Plate</h5>
+        <img class="inline" src="{{ url_for('static', filename='plate.png') }}"
+          alt="This is the death plate powerup." />
+        <p>
+          When picked up the player instantly kills all other enemies, ending
+          the round.
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer class="text-white text-center my-6">
+    <p>&copy; Alex Wright - All Rights Reserved</p>
+    <p>
+      Images:
+      <a href="https://dribbble.com/shots/2767829-Puzzle-Game-Gems-And-Power-Ups" class="text-red-500">Powerups</a>,
+      <a href="https://opengameart.org/content/slates-32x32px-orthogonal-tileset-by-ivan-voirol"
+        class="text-red-500">Tileset</a>,
+      <a href="https://vxresource.wordpress.com/page/2/#jp-carousel-602" class="text-red-500">Player & Enemies</a>,
+      <a href="https://bdragon1727.itch.io/retro-impact-effect-pack-3" class="text-red-500">Bullets</a>,
+      <a href="https://www.youtube.com/watch?v=a0km0IoZBvM" class="text-red-500">Theme Song</a>,
+      <a href="https://freesound.org/people/MusicLegends/sounds/344315" class="text-red-500">Shield Sound</a>,
+      <a href="https://pixabay.com/sound-effects/videogame-death-sound-43894/" class="text-red-500">Death Sound</a>,
+      <a href="https://pixabay.com/sound-effects/8-bit-fireball-81148/" class="text-red-500">Death Plate Sound</a>
+    </p>
+  </footer>
+</body>
+
+</html>

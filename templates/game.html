@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Game</title>
+    <link rel='stylesheet' href='{{ url_for("static", filename="styles.css")}}'/>
+    <script type='module' defer src='{{ url_for("static", filename="main.js")}}'></script>
+</head>
+
+<body class="h-screen bg-green-900">
+    <header>
+        <nav class="flex justify-around items-center bg-green-800">
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('index') }}"
+            >Home</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('game') }}"
+            >Game</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('leaderboard') }}"
+            >Leaderboard</a
+          >
+          {% if g.user %}
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('logout') }}"
+            >Logout</a
+          >
+          {% else %}
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('login') }}"
+            >Login</a
+          >
+          <a
+            class="py-4 px-8 my-2 text-white font-medium rounded-2xl hover:bg-green-600"
+            href="{{ url_for('register') }}"
+            >Register</a
+          >
+          {% endif %}
+        </nav>
+      </header>
+    <main class="w-fit mx-auto">
+        <h1 class="select-none font-medium text-white text-6xl w-fit my-4 mx-auto">Round <span id="round-label"></span></h1>
+        <div class="relative">
+            <div class="select-none absolute w-full h-full flex justify-center items-center top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" id="countdown">
+                <h1 class="text-red-600 font-medium text-6xl"></h1>
+            </div>
+            <div class="select-none absolute w-full h-full flex flex-col justify-center items-center top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" id="game-over" style="display: none;">
+                <h1 class="my-1 text-red-600 font-medium text-6xl">Game Over!</h1>
+                <h1 class="my-1 text-blue-600 font-medium text-6xl">You reached round <span id="round-reached"></span>!</h1>
+                <p class="text-white text-lg font-medium">If you want to play again, press the space bar or <button onclick="location.reload()" class=" text-green-500">click here</button></p>
+            </div>
+            <canvas class="bg-black border-solid border-black border-4" width="1280" height="640"></canvas>
+        </div>
+    </main>
+</body>
+ 
+</html>
